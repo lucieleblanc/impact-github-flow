@@ -20,8 +20,9 @@ console.log("names of people in space: ", astroNames(peopleInSpace))
 const allInSameCraft = (data) => {
   // return a boolean that specifies whether all astronauts are in the same space craft
   let allSame = true;
+
   for (var i = 0; i < data.length - 1; i++) {
-    if (data.people[i].craft != data.people[i+1].craft) {
+    if (data.people[i].craft !== data.people[i+1].craft) {
       allSame = false;
     }
   }
@@ -46,14 +47,12 @@ console.log("where's Joe? ", wheresJoe(peopleInSpace))
 
 // BONUS
 // Using your astroNames function, dynamically render each of the astronauts' names to the DOM in an unordered list when the page loads.
-const renderNames = () => {
-  let answer = "";
+window.onload = () => {
   let names = astroNames(peopleInSpace);
-  console.log(names);
-  names.forEach((person) => {
-    answer += ("<li>" + person + "</li>");
-  })
-  console.log(answer);
-  answer = "<ul>" + answer + "</ul>";
-  document.body.innerHTML += (answer);
-}
+  let nameListItems = names.map((person) => {
+    return ("<li>" + person + "</li>")
+  });
+  let nameItemString = nameListItems.join("\n");
+  console.log(nameItemString);
+  document.body.innerHTML += ("<ul>" + nameItemString + "</ul>");
+};
